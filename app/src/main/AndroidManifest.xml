@@ -2,12 +2,12 @@
     package="edu.dtcc.sean.androidlivewallpaper">
 
     <application android:allowBackup="true" android:label="@string/app_name"
-        android:icon="@drawable/ic_launcher" android:theme="@style/AppTheme">
+        android:icon="@drawable/colorstill" android:theme="@style/AppTheme">
 
         <service
             android:name=".GIFLiveWallpaperService"
             android:enabled="true"
-            android:label="GIF Wallpaper"
+            android:label="Razor Sharp Falcon Diver"
             android:permission="android.permission.BIND_WALLPAPER" >
             <intent-filter>
                 <action android:name="android.service.wallpaper.WallpaperService"/>

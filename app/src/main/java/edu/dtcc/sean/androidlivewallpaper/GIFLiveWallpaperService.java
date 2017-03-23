@@ -35,7 +35,7 @@ public class GIFLiveWallpaperService extends WallpaperService
     private class GIFWallpaperEngine extends WallpaperService.Engine
     {
         // Represents the delay between re-draw operations
-        private final int framesPerSecond = 20;
+        private final int frameDuration = 10;
 
         private SurfaceHolder surfaceHolder;
         private Movie movie;
@@ -64,7 +64,8 @@ public class GIFLiveWallpaperService extends WallpaperService
 
         private void draw()
         {
-            if (isVisible) {
+            if (isVisible)
+            {
                 Canvas canvas = surfaceHolder.lockCanvas();
                 canvas.save();
 
@@ -76,7 +77,7 @@ public class GIFLiveWallpaperService extends WallpaperService
                 movie.setTime((int) (System.currentTimeMillis() % movie.duration()));
 
                 handler.removeCallbacks(drawGIF);
-                handler.postDelayed(drawGIF, framesPerSecond);
+                handler.postDelayed(drawGIF, frameDuration);
             }
         }
 

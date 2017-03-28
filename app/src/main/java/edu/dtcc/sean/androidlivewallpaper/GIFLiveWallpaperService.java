@@ -23,16 +23,17 @@ public class GIFLiveWallpaperService extends WallpaperService
             Movie movie = Movie.decodeStream(
                     getResources().getAssets().open("colors.gif"));
 
-            return new GIFWallpaperEngine(movie);
+            return new LiveWallpaperEngine(movie);
         }
         catch(IOException e)
         {
-            Log.d("GIF", "Could not load asset");
+            // Display error
+            Log.d("GIF", "Could not GIF");
             return null;
         }
     }
 
-    private class GIFWallpaperEngine extends WallpaperService.Engine
+    private class LiveWallpaperEngine extends WallpaperService.Engine
     {
         // Represents the delay between re-draw operations
         private final int frameDuration = 10;
@@ -42,7 +43,7 @@ public class GIFLiveWallpaperService extends WallpaperService
         private boolean isVisible;
         private Handler handler;
 
-        public GIFWallpaperEngine(Movie movie)
+        public LiveWallpaperEngine(Movie movie)
         {
             this.movie = movie;
             handler = new Handler();

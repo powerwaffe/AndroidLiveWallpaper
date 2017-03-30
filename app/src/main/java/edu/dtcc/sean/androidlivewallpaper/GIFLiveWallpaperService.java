@@ -6,12 +6,12 @@ import android.os.Handler;
 import android.service.wallpaper.WallpaperService;
 import android.util.Log;
 import android.view.SurfaceHolder;
-
 import java.io.IOException;
 
-/**
- * Created by Sean on 3/23/2017.
- */
+/** When ran this program creates a live wallpaper from a gif file. The Live wallpaper should
+ * be placed within the wallpaper directory under live wallpapers.
+ * The live wallpaper should have a custom icon and named created with it upon launch.
+ * NOTE: This program must be ran with launch options set to "nothing". */
 
 public class GIFLiveWallpaperService extends WallpaperService
 {
@@ -35,13 +35,12 @@ public class GIFLiveWallpaperService extends WallpaperService
 
     private class LiveWallpaperEngine extends WallpaperService.Engine
     {
-        // Represents the delay between re-draw operations
-        private final int frameDuration = 10;
+        private final int frameDuration = 20; // Represents the delay between re-draw operations
 
         private SurfaceHolder surfaceHolder;
-        private Movie movie;
-        private boolean isVisible;
-        private Handler handler;
+        private Movie movie;    // Animated GIF must be created as a Movie object
+        private boolean isVisible; // Variable to check if the live wallpaper is visible
+        private Handler handler; // Handler object is responsible for drawing the wallpaper
 
         public LiveWallpaperEngine(Movie movie)
         {
@@ -77,6 +76,7 @@ public class GIFLiveWallpaperService extends WallpaperService
                 surfaceHolder.unlockCanvasAndPost(canvas);
                 movie.setTime((int) (System.currentTimeMillis() % movie.duration()));
 
+                // Draw live wallpaper
                 handler.removeCallbacks(drawGIF);
                 handler.postDelayed(drawGIF, frameDuration);
             }
